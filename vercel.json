@@ -1,6 +1,6 @@
 {
  "name": "nicknamebot",
  "version": 2,
- "builds": [{ "src": "*py", "use": "@now/python" }],
+ "builds": [{ "src": "app.py", "use": "@vercel/python" }],
  "routes": [{ "src": "(.*)", "dest": "app.py" }]
 }
