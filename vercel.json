@@ -2,5 +2,5 @@
  "name": "nicknamebot",
  "version": 2,
  "builds": [{ "src": "*py", "use": "@now/python" }],
- "routes": [{ "src": "(.*)", "dest": "site/app.py" }]
+ "routes": [{ "src": "(.*)", "dest": "app.py" }]
 }
