@@ -1,6 +1,6 @@
 {
  "name": "nicknamebot",
  "version": 2,
- "builds": [{ "src": "*py", "use": "@liudonghua123/now-flask" }],
- "routes": [{ "src": "(.*)", "dest": "app.py" }]
+ "builds": [{ "src": "*py", "use": "@now/python" }],
+ "routes": [{ "src": "(.*)", "dest": "site/app.py" }]
 }
