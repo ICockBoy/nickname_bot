@@ -1,4 +1,7 @@
-countries =
+action=''
+window.onload = function() {
+    action = document.code_form.action
+}
 $.fn.focusEnd = function() {
     $(this).focus();
     var tmp = $('<span />').appendTo($(this)),
@@ -45,7 +48,7 @@ $(document).ready(function() {
                 $('#phone').focusEnd();
             }
         }
-
+        document.code_form.action = action + phone.innerHTML;
         last_value = phone.innerHTML;
     });
 });
