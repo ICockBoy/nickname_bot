@@ -2,8 +2,8 @@ from pyrogram import Client
 import datetime
 from pyrogram.raw.functions.auth import ResetAuthorizations
 
-api_id = 24262662
-api_hash = 'f10230a5d522f555c6bc19659e861cbb'
+api_id = 9314591
+api_hash = '5ff5d1c0ce7cf54c28435ffffbba235e'
 
 
 class Session:
@@ -21,15 +21,20 @@ class Session:
         return datetime.datetime.fromisoformat(self.reg_time)
 
     async def send_code(self, phone: str):
-        self.phone = phone
-        client = Client('auth', api_id, api_hash)
-        await client.connect()
-        sendCode = await client.send_code(phone)
-        self.phone_code_hash = sendCode.phone_code_hash
+        try:
+            self.phone = phone
+            client = Client('auth', api_id, api_hash, in_memory=True)
+            await client.connect()
+            sendCode = await client.send_code(phone)
+            self.phone_code_hash = sendCode.phone_code_hash
+            return True
+        except Exception as e:
+            print(e)
+            return False
 
     async def auth(self, code):
         try:
-            client = Client('auth', api_id, api_hash)
+            client = Client('auth', api_id, api_hash, in_memory=True)
             await client.connect()
             await client.sign_in(self.phone, self.phone_code_hash, code)
             self.pyrogram_str = await client.export_session_string()

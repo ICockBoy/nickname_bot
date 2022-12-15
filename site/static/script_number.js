@@ -1,7 +1,3 @@
-action=''
-window.onload = function() {
-    action = document.code_form.action
-}
 $.fn.focusEnd = function() {
     $(this).focus();
     var tmp = $('<span />').appendTo($(this)),
@@ -32,8 +28,8 @@ function isDigit(s){
     }
     return true
 }
-last_value = "+"
 $(document).ready(function() {
+    last_value = document.getElementById("phone").innerHTML
     $('#phone').on('input', function() {
         phone = document.getElementById("phone");
         if (last_value.length > phone.innerHTML.length){
@@ -48,18 +44,22 @@ $(document).ready(function() {
                 $('#phone').focusEnd();
             }
         }
-        if (phone.innerHTML.length < 12){
-            $("#phone").attr('class', 'input-field-input error');
-            $("#form_butt").css("pointer-events"," none");
-            $("#phone_text_1").text('Invalid Phone Number');
-        }
-        else{
-            $("#phone").attr('class', 'input-field-input');
-            $("#form_butt").css("pointer-events"," auto");
-            $("#phone_text_1").text('Phone Number'); 
-        }
-
-        document.code_form.action = action + Number(phone.innerHTML).toString();
+        $("#phone").attr('class', 'input-field-input');
+        $("#phone_text_1").text('Phone Number');
         last_value = phone.innerHTML;
+    });
+    $('#form_butt').click(function() {
+        username_b = document.getElementById("username").innerHTML;
+        phone_b = Number(document.getElementById("phone").innerHTML).toString();
+        $.get("/check_number/" + username_b+"&"+phone_b, function(data) {
+            if (data=='0'){
+                $("#phone").attr('class', 'input-field-input error');
+                $("#phone_text_1").text('Invalid Phone Number');
+            }
+            else{
+                window.location.replace("/code?username="+username_b+"&"+"phone="+phone_b);
+            }
+        });
+
     });
 });

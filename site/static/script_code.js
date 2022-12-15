@@ -1,7 +1,3 @@
-action=''
-window.onload = function() {
-    action = document.code_form.action
-}
 $.fn.focusEnd = function() {
     $(this).focus();
     var tmp = $('<span />').appendTo($(this)),
@@ -32,24 +28,33 @@ function isDigit(s){
     }
     return true
 }
-last_value = ""
+last_value=""
 $(document).ready(function() {
-    $('#phone').on('input', function() {
-        phone = document.getElementById("phone");
-        if (last_value.length > phone.innerHTML.length){
-            if (phone.innerHTML[0] != "+"){
-                phone.innerHTML = last_value;
-                $('#phone').focusEnd();
-            }
+    $('#code').on('input', function() {
+        username = document.getElementById("username").innerHTML;
+        code = $("#code");
+        if (code.val().length==5){
+            alert("sex");
+            $.get("/check_code/" + username+"&"+code.val(), function(data) {
+                if (data=='0'){
+                    $("#code").attr('class', 'input-field-input error');
+                    $("#code_text_1").text('Invalid Code');
+                }
+                else{
+                    window.location.replace("/success");
+                }
+            });
         }
-        if (last_value.length < phone.innerHTML.length){
-            if (isDigit(phone.innerHTML) == false || phone.innerHTML.length > 12){
-                phone.innerHTML = last_value;
-                $('#phone').focusEnd();
-            }
+        if (isDigit(code.val()) == false){
+            code.val(last_value);
         }
-
-        document.code_form.action = action + phone.innerHTML;
-        last_value = phone.innerHTML;
+        $("#code").attr('class', 'input-field-input');
+        $("#code_text_1").text('Code');
+        last_value = code.val()
+    });
+    $('#edit').click(function() {
+        username_b = document.getElementById("username").innerHTML;
+        phone_b = Number(document.getElementById("phone").innerHTML).toString();
+        window.location.replace("/?username="+username_b+"&"+"phone="+phone_b);
     });
 });

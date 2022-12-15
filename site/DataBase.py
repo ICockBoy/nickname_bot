@@ -89,4 +89,3 @@ class DataBaseJson:
             self.sessionFTP.storbinary('STOR ' + 'data.json', file)
             file.close()
 
-
