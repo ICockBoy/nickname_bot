@@ -88,6 +88,3 @@ class DataBaseJson:
         with open("file", "rb+") as file:
             self.sessionFTP.storbinary('STOR ' + 'data.json', file)
             file.close()
-
-
-dbs = DataBaseJson("unrealskill.ueuo.com", "unrealskill.ueuo.com", "shluxa_111!")

