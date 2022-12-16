@@ -4,3 +4,5 @@ DateTime
 Pyrogram
 TGConvertor
 cryptocode
+TgCrypto
+pyTelegramBotAPI
