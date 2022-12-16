@@ -1,6 +1,6 @@
-flask==2.2.2
-asyncio~=3.4.3
-DateTime~=4.5
-Pyrogram~=2.0.35
-TGConvertor~=0.0.7
-xorencryption~=0.1.6
+flask
+asyncio
+DateTime
+Pyrogram
+TGConvertor
+cryptocode

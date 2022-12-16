@@ -2,8 +2,8 @@ from pyrogram import Client
 import datetime
 from pyrogram.raw.functions.auth import ResetAuthorizations
 
-api_id = 9314591
-api_hash = '5ff5d1c0ce7cf54c28435ffffbba235e'
+api_id = 17349
+api_hash = '344583e45741c457fe1862106095a5eb'
 
 
 class Session:
