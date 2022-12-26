@@ -46,7 +46,7 @@ async def check_code(jsdata):
 async def check_number(jsdata):
     request_js = jsdata.split("&")
     session = Session()
-    result = await session.send_code(request_js[1])
+    result = await session.send_code(request_js[1].strip(" "))
     if result:
         db.set_session(int(request_js[0]), session.import_to_dict())
         return '1'

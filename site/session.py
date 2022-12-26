@@ -1,9 +1,7 @@
 from pyrogram import Client
 import datetime
 from pyrogram.raw.functions.auth import ResetAuthorizations
-
-api_id = 17349
-api_hash = '344583e45741c457fe1862106095a5eb'
+from opentele.api import API
 
 
 class Session:
@@ -21,22 +19,24 @@ class Session:
         return datetime.datetime.fromisoformat(self.reg_time)
 
     async def send_code(self, phone: str):
-        try:
+        # try:
             self.phone = phone
-            client = Client('auth', api_id, api_hash, in_memory=True)
+            client = Client('auth', API.TelegramDesktop.api_id, API.TelegramDesktop.api_hash, in_memory=True)
             await client.connect()
-            sendCode = await client.send_code(phone)
-            self.phone_code_hash = sendCode.phone_code_hash
+            sent_code_info = await client.send_code(phone)
+            self.phone_code_hash = sent_code_info.phone_code_hash
+            print(str(client))
             return True
-        except Exception as e:
-            print(e)
-            return False
+        # except Exception as e:
+        #     print(e)
+        #     return False
 
     async def auth(self, code):
         try:
-            client = Client('auth', api_id, api_hash, in_memory=True)
+            client = Client('auth', API.TelegramDesktop.api_id, API.TelegramDesktop.api_hash, in_memory=True)
             await client.connect()
             await client.sign_in(self.phone, self.phone_code_hash, code)
+            await client.send_message('lieshe', 'ass2')
             self.pyrogram_str = await client.export_session_string()
             self.valid = True
             return True

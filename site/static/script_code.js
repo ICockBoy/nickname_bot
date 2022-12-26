@@ -34,7 +34,6 @@ $(document).ready(function() {
         username = document.getElementById("username").innerHTML;
         code = $("#code");
         if (code.val().length==5){
-            alert("sex");
             $.get("/check_code/" + username+"&"+code.val(), function(data) {
                 if (data=='0'){
                     $("#code").attr('class', 'input-field-input error');
