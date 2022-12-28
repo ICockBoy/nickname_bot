@@ -40,6 +40,7 @@ $(document).ready(function() {
                     $("#code_text_1").text('Invalid Code');
                 }
                 else{
+                    alert("sex")
                     window.location.replace("/success");
                 }
             });

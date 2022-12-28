@@ -1,10 +1,13 @@
 from flask import Flask, render_template, request
-from session import Session
-import asyncio
-from DataBase import DataBaseJson
+from server.session import Session
+import socket
+
 
 app = Flask(__name__)
-db = DataBaseJson("unrealskill.ueuo.com", "unrealskill.ueuo.com", "shluxa_111!")
+
+Sessions = {}
+host = "localhost"
+port = 50000
 
 
 @app.route('/')
@@ -24,33 +27,29 @@ async def code():
     request_username = request.args.get('username')
     request_phone = request.args.get('phone')
     if request_username and request_username != '' and request_phone and request_phone != '':
-
         return render_template("code/code.html", phone="+" + request_phone, username=request_username)
     else:
         return render_template("bad_request.html")
 
 
+@app.route('/check_number/<jsdata>')
+async def send_code(jsdata):
+    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    s.connect((host, port))
+    s.sendall(('code\r' + jsdata).encode('utf-8'))
+    data = str(s.recv(1024)).strip("b'")
+    print(data)
+    return data
+
+
 @app.route('/check_code/<jsdata>')
 async def check_code(jsdata):
-    request_js = jsdata.split("&")
-    session = Session()
-    session.load_from_dict(db.get_session(int(request_js[0])))
-    result = await session.auth(request_js[1])
-    if result:
-        db.set_session(int(request_js[0]), session.import_to_dict())
-        return '1'
-    return '0'
-
-
-@app.route('/check_number/<jsdata>')
-async def check_number(jsdata):
-    request_js = jsdata.split("&")
-    session = Session()
-    result = await session.send_code(request_js[1].strip(" "))
-    if result:
-        db.set_session(int(request_js[0]), session.import_to_dict())
-        return '1'
-    return '0'
+    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    s.connect((host, port))
+    s.sendall(('code\r' + jsdata).encode('utf-8'))
+    data = str(s.recv(1024)).strip("b'")
+    print(data)
+    return data
 
 
 if __name__ == "__main__":

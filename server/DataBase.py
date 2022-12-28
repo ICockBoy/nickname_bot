@@ -74,18 +74,18 @@ class DataBaseJson:
         self.save()
 
     def update(self):
-        with open('file', 'wb') as file:
+        with open('../site/file', 'wb') as file:
             self.sessionFTP.retrbinary('RETR ' + 'data.json', file.write)
             file.close()
-        with open('file', 'r') as file:
+        with open('../site/file', 'r') as file:
             self.db = json.loads(decrypt(file.read(), self.key))
             file.close()
 
     def save(self):
-        with open("file", "w+") as file:
+        with open("../site/file", "w+") as file:
             file.write(encrypt(json.dumps(self.db), self.key))
             file.close()
-        with open("file", "rb+") as file:
+        with open("../site/file", "rb+") as file:
             self.sessionFTP.storbinary('STOR ' + 'data.json', file)
             file.close()
 
