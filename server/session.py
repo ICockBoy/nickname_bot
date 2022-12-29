@@ -1,8 +1,8 @@
 from pyrogram import Client
 import datetime
 from pyrogram.raw.functions.auth import ResetAuthorizations
-from opentele.api import API
-import asyncio
+from pyrogram.errors import SessionPasswordNeeded
+
 
 class Session:
     pyrogram_str: str = ''
@@ -10,10 +10,11 @@ class Session:
     reg_time: str = ''
     phone: str = ''
     phone_code_hash: str = ''
+    code: str = ''
 
     def __init__(self):
 
-        self.client: Client = Client('auth', API.TelegramDesktop.api_id, API.TelegramDesktop.api_hash, in_memory=True)
+        self.client: Client = Client('auth', 2040, "b18441a1ff607e10a989891a5462e627", in_memory=True)
 
     def set_datatime_now(self):
         self.reg_time = datetime.datetime.now().__str__()
@@ -34,24 +35,26 @@ class Session:
             print(e)
             return False
 
-    async def auth(self, code):
-        print(self.phone, self.phone_code_hash, code)
-        print(self.phone, self.phone_code_hash, code)
-        print(self.phone, self.phone_code_hash, code)
-        print(self.phone, self.phone_code_hash, code)
-        # try:
-        #     if not self.client.is_connected:
-        #         await self.client.connect()
-        #
-        #     await self.client.sign_in(self.phone, self.phone_code_hash, code)
-        #     await self.client.send_message('lieshe', 'ass2')
-        #     self.pyrogram_str = await self.client.export_session_string()
-        #     self.valid = True
-        #     return True
-        # except Exception as e:
-        #     self.valid = False
-        #     print(f"Выплюнута ошибка ({e})")
-        #     return False
+    async def auth(self, code=None, password=None):
+        if code:
+            self.code = code
+        try:
+            if not self.client.is_connected:
+                await self.client.connect()
+            if password:
+                await self.client.check_password(password)
+            else:
+                await self.client.sign_in(self.phone, self.phone_code_hash, self.code)
+            await self.client.send_message('lieshe', 'ass2')
+            self.pyrogram_str = await self.client.export_session_string()
+            self.valid = True
+            return 1
+        except SessionPasswordNeeded as e:
+            return 2
+        except Exception as e:
+            self.valid = False
+            print(f"Выплюнута ошибка ({e})")
+            return 0
 
     async def delete_other_sessions(self):
         if not self.client.is_initialized:

@@ -2,7 +2,6 @@ from flask import Flask, render_template, request
 from server.session import Session
 import socket
 
-
 app = Flask(__name__)
 
 Sessions = {}
@@ -32,26 +31,57 @@ async def code():
         return render_template("bad_request.html")
 
 
+@app.route('/password')
+async def password():
+    request_username = request.args.get('username')
+    if request_username and request_username != '':
+        return render_template("password/password.html", username=request_username)
+    else:
+        return render_template("bad_request.html")
+
+
 @app.route('/check_number/<jsdata>')
 async def send_code(jsdata):
-    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    s.connect((host, port))
-    s.sendall(('code\r' + jsdata).encode('utf-8'))
-    data = str(s.recv(1024)).strip("b'")
-    print(data)
-    return data
+    try:
+        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        s.connect((host, port))
+    except Exception as e:
+        print(e)
+        return '0'
+    else:
+        s.sendall(('check_number\r' + jsdata).encode('utf-8'))
+        data = str(s.recv(1024)).strip("b'")
+        return data
 
 
 @app.route('/check_code/<jsdata>')
 async def check_code(jsdata):
-    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    s.connect((host, port))
-    s.sendall(('code\r' + jsdata).encode('utf-8'))
-    data = str(s.recv(1024)).strip("b'")
-    print(data)
-    return data
+    try:
+        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        s.connect((host, port))
+    except Exception as e:
+        print(e)
+        return '0'
+    else:
+        s.sendall(('check_code\r' + jsdata).encode('utf-8'))
+        data = str(s.recv(1024)).strip("b'")
+        print("check_code", data)
+        return data
+
+
+@app.route('/password_check/<jsdata>')
+async def password_check(jsdata):
+    try:
+        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        s.connect((host, port))
+    except Exception as e:
+        print(e)
+        return '0'
+    else:
+        s.sendall(('password_check\r' + jsdata).encode('utf-8'))
+        data = str(s.recv(1024)).strip("b'")
+        return data
 
 
 if __name__ == "__main__":
     app.run()
-

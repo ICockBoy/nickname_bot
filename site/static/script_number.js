@@ -56,7 +56,7 @@ $(document).ready(function() {
                 $("#phone").attr('class', 'input-field-input error');
                 $("#phone_text_1").text('Invalid Phone Number');
             }
-            else{
+            else if (data=='1'){
                 window.location.replace("/code?username="+username_b+"&"+"phone="+phone_b);
             }
         });

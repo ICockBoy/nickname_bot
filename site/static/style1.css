@@ -1976,7 +1976,6 @@ html.is-ios .input-field-password .input-field-input[type=password] {
 }
 
 .input-field-password .toggle-visible:before {
-    content: ""
 }
 
 .input-field-password .toggle-visible.eye-hidden:before {

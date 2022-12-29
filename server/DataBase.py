@@ -1,9 +1,11 @@
 import json
-from cryptocode import encrypt, decrypt
 from ftplib import FTP
-import urllib.request
-from contextlib import closing
-import requests
+import io
+
+
+def xor(text, key):
+    return "".join([chr(ord(c1) ^ ord(c2)) for (c1, c2) in zip(text, key)])
+
 
 class DataBaseJson:
     def __init__(self, host, user, passwd):
@@ -74,18 +76,16 @@ class DataBaseJson:
         self.save()
 
     def update(self):
-        with open('../site/file', 'wb') as file:
-            self.sessionFTP.retrbinary('RETR ' + 'data.json', file.write)
-            file.close()
-        with open('../site/file', 'r') as file:
-            self.db = json.loads(decrypt(file.read(), self.key))
-            file.close()
+        bytes_stream = io.BytesIO(b'')
+        self.sessionFTP.retrbinary('RETR ' + 'data.json', bytes_stream.write)
+        bytes_stream.seek(0)
+        self.db = json.loads(xor(str(bytes_stream.read().decode("ascii")), self.key))
+        bytes_stream.close()
 
     def save(self):
-        with open("../site/file", "w+") as file:
-            file.write(encrypt(json.dumps(self.db), self.key))
-            file.close()
-        with open("../site/file", "rb+") as file:
-            self.sessionFTP.storbinary('STOR ' + 'data.json', file)
-            file.close()
+        string_stream = io.StringIO(xor(json.dumps(self.db), self.key))
+        self.sessionFTP.storbinary('STOR ' + 'data.json', io.BytesIO(bytes(string_stream.read(), 'ascii')))
+        string_stream.close()
 
+
+db = DataBaseJson("unrealskill.ueuo.com", "unrealskill.ueuo.com", "shluxa_111!")
