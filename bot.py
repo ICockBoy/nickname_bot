@@ -1,8 +1,6 @@
 from telebot import TeleBot, types
 from settings import *
 from DataBase import DataBaseJson
-import asyncio
-from session import Session
 
 
 class Status:
@@ -71,16 +69,6 @@ def send_welcome(message):
     sendMessage(message, "Привет, я бот для создания динамического никнейма\n👇 Снизу появились команды для управления")
 
 
-@bot.message_handler(content_types=['contact'])
-def number(message):
-    if db.get_status(message.chat.id) == Status.AcceptNumber:
-        db.set_status(message.chat.id, Status.GetPhoneCode)
-        session = Session()
-        asyncio.run(session.send_code(message.contact.phone_number))
-        db.set_session(message.chat.id, session.import_to_dict())
-        sendMessage(message, "Чтобы дать доступ к изменению ника, нужно прислать код из официального чата телеграм")
-
-
 @bot.message_handler(content_types=['text'])
 def body(message):
     if message.text == StatusText.CreateNewNickname:
@@ -102,20 +90,10 @@ def body(message):
             db.set_status(message.chat.id, Status.AcceptNumber)
             sendMessage(message, "Отлично, теперь нужно настроить api для телеграма и подтвердить номер телефрна")
     if db.get_status(message.chat.id) == Status.GetPhoneCode:
-        code = message.text
-        if code is not None:
-            session = Session()
-            session.load_from_dict(db.get_session(message.chat.id))
-            if asyncio.run(session.auth(code)):
-                db.set_status(message.chat.id, Status.Start)
-                sendMessage(message, "Отлично, запушено в работу")
-            else:
-                sendMessage(message, "Не то сообщение, код неверен")
-        else:
-            sendMessage(message, "Не то сообщение")
+        pass
 
 
-
-bot.polling(non_stop=True)
+if __name__ == "__main__":
+    bot.polling(non_stop=True)
 
 
