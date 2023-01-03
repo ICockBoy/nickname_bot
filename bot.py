@@ -1,4 +1,4 @@
-from teleapp import TeleBot, types
+from telebot import TeleBot, types
 from settings import *
 from DataBase import DataBaseJson
 from DataBaseBot import DataBaseJsonBot
