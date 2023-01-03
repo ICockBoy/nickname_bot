@@ -1,7 +1,7 @@
 from telebot import TeleBot, types
-from settings import *
-from DataBase import DataBaseJson
-from DataBaseBot import DataBaseJsonBot
+from app.settings import *
+from app.DataBase import DataBaseJson
+from app.DataBaseBot import DataBaseJsonBot
 
 
 class Status:
