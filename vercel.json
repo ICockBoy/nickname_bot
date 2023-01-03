@@ -1,6 +1,6 @@
 {
  "name": "nicknamebot",
  "version": 2,
- "builds": [{ "src": "bot.py", "use": "@vercel/python" }],
- "routes": [{ "src": "(.*)", "dest": "bot.py" }]
+ "builds": [{ "src": "api/bot.py", "use": "@vercel/python" }],
+ "routes": [{ "src": "(.*)", "dest": "api/bot.py" }]
 }

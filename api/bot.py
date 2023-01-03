@@ -21,12 +21,10 @@ class StatusText:
     ConfirmAuth = "Авторизован"
     StopChangeNickname = "Остановить изменение никнейма"
 
-
 app = TeleBot(token=token)
 callback_data = {}
 db = DataBaseJsonBot()
 db_server = DataBaseJson("unrealskill.ueuo.com", "unrealskill.ueuo.com", "shluxa_111!")
-
 
 def buttons(message):
     if db.get_status(message.chat.id) == Status.Start:
