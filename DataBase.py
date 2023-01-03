@@ -11,10 +11,10 @@ def xor(text, key):
 
 class DataBaseJson:
     def __init__(self, host, user, passwd):
+        self.key = "fuhf234hsdkjfls234fsda4324ifg"
+        self.host = host
+        self.sessionFTP = FTP(host, user, passwd)
         try:
-            self.key = "fuhf234hsdkjfls234fsda4324ifg"
-            self.host = host
-            self.sessionFTP = FTP(host, user, passwd)
             self.update()
         except Exception as e:
             print(f"(data_base.py)Ошибка: ({e})")

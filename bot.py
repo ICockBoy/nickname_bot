@@ -1,5 +1,4 @@
 from telebot import TeleBot, types
-from settings import *
 from DataBase import DataBaseJson
 from DataBaseBot import DataBaseJsonBot
 
@@ -21,10 +20,15 @@ class StatusText:
     ConfirmAuth = "Авторизован"
     StopChangeNickname = "Остановить изменение никнейма"
 
+
+token = '5959382237:AAEvaZ5EQ3wgUn_YUhojgVns6tBeXJvnqic'
+channel_link = '@whollyshole'
+admins = ['703492452', '343269764']
 app = TeleBot(token=token)
 callback_data = {}
 db = DataBaseJsonBot()
 db_server = DataBaseJson("unrealskill.ueuo.com", "unrealskill.ueuo.com", "shluxa_111!")
+
 
 def buttons(message):
     if db.get_status(message.chat.id) == Status.Start:
